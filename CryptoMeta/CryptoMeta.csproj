@@ -19,4 +19,10 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CryptoMeta.Business\CryptoMeta.Business.csproj" />
+    <ProjectReference Include="..\CryptoMeta.DataAccess\CryptoMeta.DataAccess.csproj" />
+    <ProjectReference Include="..\CryptoMeta.Entities\CryptoMeta.Entities.csproj" />
+  </ItemGroup>
+
 </Project>

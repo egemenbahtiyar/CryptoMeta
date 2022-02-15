@@ -5,6 +5,12 @@ VisualStudioVersion = 16.0.31613.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoMeta", "CryptoMeta\CryptoMeta.csproj", "{B7DE6E05-2230-4DF1-BFB9-46649CE6A52F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoMeta.Entities", "CryptoMeta.Entities\CryptoMeta.Entities.csproj", "{22C53C6F-23AD-418A-9DAC-5606BF2EF17C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoMeta.DataAccess", "CryptoMeta.DataAccess\CryptoMeta.DataAccess.csproj", "{B392FDE7-4CC6-497A-8D02-628E06295C4D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoMeta.Business", "CryptoMeta.Business\CryptoMeta.Business.csproj", "{99CB90AB-A2E9-4D60-AE6D-67F44E0EBA1F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{B7DE6E05-2230-4DF1-BFB9-46649CE6A52F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7DE6E05-2230-4DF1-BFB9-46649CE6A52F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7DE6E05-2230-4DF1-BFB9-46649CE6A52F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22C53C6F-23AD-418A-9DAC-5606BF2EF17C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22C53C6F-23AD-418A-9DAC-5606BF2EF17C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22C53C6F-23AD-418A-9DAC-5606BF2EF17C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22C53C6F-23AD-418A-9DAC-5606BF2EF17C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B392FDE7-4CC6-497A-8D02-628E06295C4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B392FDE7-4CC6-497A-8D02-628E06295C4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B392FDE7-4CC6-497A-8D02-628E06295C4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B392FDE7-4CC6-497A-8D02-628E06295C4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99CB90AB-A2E9-4D60-AE6D-67F44E0EBA1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99CB90AB-A2E9-4D60-AE6D-67F44E0EBA1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99CB90AB-A2E9-4D60-AE6D-67F44E0EBA1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99CB90AB-A2E9-4D60-AE6D-67F44E0EBA1F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
