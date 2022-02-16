@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CryptoMeta.DataAccess\CryptoMeta.DataAccess.csproj" />
+    <ProjectReference Include="..\CryptoMeta.Entities\CryptoMeta.Entities.csproj" />
+  </ItemGroup>
+
 </Project>
