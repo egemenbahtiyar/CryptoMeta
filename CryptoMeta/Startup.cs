@@ -1,3 +1,7 @@
+using CryptoMeta.Business.Abstract;
+using CryptoMeta.Business.Concrete;
+using CryptoMeta.DataAccess.Abstract;
+using CryptoMeta.DataAccess.Concrete;
 using CryptoMeta.Identitiy;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -65,6 +69,19 @@ namespace CryptoMeta
 
           
             });
+            // Dependency Injection
+            services.AddScoped<IBlogDal, EfCoreBlogDal>();
+            services.AddScoped<ICategoryDal, EfCoreCategoryDal>();
+            services.AddScoped<ICryptoNewDal, EfCoreCryptoNewDal>();
+            services.AddScoped<IForumPostDal, EfCoreForumPostDal>();
+            services.AddScoped<INftDal, EfCoreNftDal>();
+
+            services.AddScoped<IBlogService, BlogManager>();
+            services.AddScoped<ICategoryService, CategoryManager>();
+            services.AddScoped<ICryptoNewService, CryptoNewManager>();
+            services.AddScoped<IForumPostService, ForumPostManager>();
+            services.AddScoped<INftService, NftManager>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
