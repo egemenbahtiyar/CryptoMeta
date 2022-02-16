@@ -9,8 +9,8 @@ namespace CryptoMeta.DataAccess.Abstract
     {
         T GetbyId(int id);
         List<T> GetAll(Expression<Func<T, bool>> filter = null);
-        void Create (T entitiy);
-        void Delete (T entitiy);
-        void Update (T entitiy);
+        void Create (T entity);
+        void Delete (T entity);
+        void Update (T entity);
     }
 }

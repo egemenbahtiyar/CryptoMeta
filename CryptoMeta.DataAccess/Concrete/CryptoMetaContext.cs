@@ -26,11 +26,11 @@ namespace CryptoMeta.Entities
         public virtual DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
         public virtual DbSet<AspNetUserTokens> AspNetUserTokens { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
-        public virtual DbSet<Blogs> Blogs { get; set; }
+        public virtual DbSet<Blog> Blogs { get; set; }
         public virtual DbSet<Category> Category { get; set; }
-        public virtual DbSet<CryptoNews> CryptoNews { get; set; }
-        public virtual DbSet<ForumPosts> ForumPosts { get; set; }
-        public virtual DbSet<Nfts> Nfts { get; set; }
+        public virtual DbSet<CryptoNew> CryptoNews { get; set; }
+        public virtual DbSet<ForumPost> ForumPosts { get; set; }
+        public virtual DbSet<Nft> Nfts { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -132,7 +132,7 @@ namespace CryptoMeta.Entities
                 entity.Property(e => e.UserName).HasMaxLength(256);
             });
 
-            modelBuilder.Entity<Blogs>(entity =>
+            modelBuilder.Entity<Blog>(entity =>
             {
                 entity.Property(e => e.BlogComment).HasMaxLength(100);
 
@@ -172,7 +172,7 @@ namespace CryptoMeta.Entities
                     .HasMaxLength(50);
             });
 
-            modelBuilder.Entity<CryptoNews>(entity =>
+            modelBuilder.Entity<CryptoNew>(entity =>
             {
                 entity.Property(e => e.NewDescription)
                     .IsRequired()
@@ -183,7 +183,7 @@ namespace CryptoMeta.Entities
                     .HasMaxLength(50);
             });
 
-            modelBuilder.Entity<ForumPosts>(entity =>
+            modelBuilder.Entity<ForumPost>(entity =>
             {
                 entity.Property(e => e.ForumComment)
                     .IsRequired()
@@ -212,7 +212,7 @@ namespace CryptoMeta.Entities
                     .HasConstraintName("FK_ForumPosts_AspNetUsers");
             });
 
-            modelBuilder.Entity<Nfts>(entity =>
+            modelBuilder.Entity<Nft>(entity =>
             {
                 entity.ToTable("NFTs");
 

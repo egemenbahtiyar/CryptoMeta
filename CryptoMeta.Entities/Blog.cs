@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace CryptoMeta.Entities
 {
-    public partial class Blogs
+    public partial class Blog
     {
         public int Id { get; set; }
         public string BlogDescription { get; set; }

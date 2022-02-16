@@ -15,8 +15,8 @@ namespace CryptoMeta.Entities
             AspNetUserLogins = new HashSet<AspNetUserLogins>();
             AspNetUserRoles = new HashSet<AspNetUserRoles>();
             AspNetUserTokens = new HashSet<AspNetUserTokens>();
-            Blogs = new HashSet<Blogs>();
-            ForumPosts = new HashSet<ForumPosts>();
+            Blogs = new HashSet<Blog>();
+            ForumPosts = new HashSet<ForumPost>();
         }
 
         public string Id { get; set; }
@@ -42,7 +42,7 @@ namespace CryptoMeta.Entities
         public virtual ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual ICollection<AspNetUserRoles> AspNetUserRoles { get; set; }
         public virtual ICollection<AspNetUserTokens> AspNetUserTokens { get; set; }
-        public virtual ICollection<Blogs> Blogs { get; set; }
-        public virtual ICollection<ForumPosts> ForumPosts { get; set; }
+        public virtual ICollection<Blog> Blogs { get; set; }
+        public virtual ICollection<ForumPost> ForumPosts { get; set; }
     }
 }

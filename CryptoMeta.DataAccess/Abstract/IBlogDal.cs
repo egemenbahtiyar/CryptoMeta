@@ -5,7 +5,8 @@ using System.Text;
 
 namespace CryptoMeta.DataAccess.Abstract
 {
-    public interface INftRepository: IRepository<Nfts>
+    public interface IBlogDal:IRepository<Blog>
     {
+
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CryptoMeta.DataAccess.Abstract
 {
-    public interface ICryptoNewRepository:IRepository<CryptoNews>
+    public interface IForumPostDal : IRepository<ForumPost>
     {
     }
 }

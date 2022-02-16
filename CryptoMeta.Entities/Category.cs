@@ -11,14 +11,14 @@ namespace CryptoMeta.Entities
     {
         public Category()
         {
-            Blogs = new HashSet<Blogs>();
-            ForumPosts = new HashSet<ForumPosts>();
+            Blogs = new HashSet<Blog>();
+            ForumPosts = new HashSet<ForumPost>();
         }
 
         public int Id { get; set; }
         public string CategoryName { get; set; }
 
-        public virtual ICollection<Blogs> Blogs { get; set; }
-        public virtual ICollection<ForumPosts> ForumPosts { get; set; }
+        public virtual ICollection<Blog> Blogs { get; set; }
+        public virtual ICollection<ForumPost> ForumPosts { get; set; }
     }
 }

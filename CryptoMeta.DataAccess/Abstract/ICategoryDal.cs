@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CryptoMeta.DataAccess.Abstract
 {
-    public interface ICategoryRepository:IRepository<Category>
+    public interface ICategoryDal:IRepository<Category>
     {
 
     }

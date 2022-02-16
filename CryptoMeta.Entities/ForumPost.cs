@@ -7,11 +7,15 @@ using System.Collections.Generic;
 
 namespace CryptoMeta.Entities
 {
-    public partial class Nfts
+    public partial class ForumPost
     {
         public int Id { get; set; }
-        public string NftDescription { get; set; }
-        public string NftImageUrl { get; set; }
-        public DateTime NftCreatedTime { get; set; }
+        public string ForumComment { get; set; }
+        public string ForumPostTime { get; set; }
+        public int CategoryId { get; set; }
+        public string UserId { get; set; }
+
+        public virtual Category Category { get; set; }
+        public virtual AspNetUsers User { get; set; }
     }
 }
