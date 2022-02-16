@@ -1,4 +1,5 @@
 ﻿using CryptoMeta.Business.Abstract;
+using CryptoMeta.DataAccess.Abstract;
 using CryptoMeta.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,29 +9,34 @@ namespace CryptoMeta.Business.Concrete
 {
     public class ForumPostManager : IForumPostService
     {
+        private IForumPostDal _forumPostDal;
+        public ForumPostManager(IForumPostDal forumPostDal)
+        {
+            _forumPostDal = forumPostDal;
+        }
         public void Create(ForumPost entity)
         {
-            throw new NotImplementedException();
+            _forumPostDal.Create(entity);
         }
 
         public void Delete(ForumPost entity)
         {
-            throw new NotImplementedException();
+            _forumPostDal.Delete(entity);
         }
 
         public List<ForumPost> GetAll()
         {
-            throw new NotImplementedException();
+            return _forumPostDal.GetAll();
         }
 
         public ForumPost GetbyId(int id)
         {
-            throw new NotImplementedException();
+            return _forumPostDal.GetbyId(id);
         }
 
         public void Update(ForumPost entity)
         {
-            throw new NotImplementedException();
+            _forumPostDal.Update(entity);
         }
     }
 }

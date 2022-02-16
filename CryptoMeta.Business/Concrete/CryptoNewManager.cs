@@ -1,4 +1,5 @@
 ﻿using CryptoMeta.Business.Abstract;
+using CryptoMeta.DataAccess.Abstract;
 using CryptoMeta.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,29 +9,34 @@ namespace CryptoMeta.Business.Concrete
 {
     public class CryptoNewManager : ICryptoNewService
     {
+        private ICryptoNewDal _cryptoNewDal;
+        public CryptoNewManager(ICryptoNewDal cryptoNewDal)
+        {
+            _cryptoNewDal = cryptoNewDal;
+        }
         public void Create(CryptoNew entity)
         {
-            throw new NotImplementedException();
+            _cryptoNewDal.Create(entity);
         }
 
         public void Delete(CryptoNew entity)
         {
-            throw new NotImplementedException();
+            _cryptoNewDal.Delete(entity);
         }
 
         public List<CryptoNew> GetAll()
         {
-            throw new NotImplementedException();
+            return _cryptoNewDal.GetAll();
         }
 
         public CryptoNew GetbyId(int id)
         {
-            throw new NotImplementedException();
+            return _cryptoNewDal.GetbyId(id);
         }
 
         public void Update(CryptoNew entity)
         {
-            throw new NotImplementedException();
+            _cryptoNewDal.Update(entity);
         }
     }
 }

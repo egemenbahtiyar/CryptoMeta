@@ -1,4 +1,5 @@
 ﻿using CryptoMeta.Business.Abstract;
+using CryptoMeta.DataAccess.Abstract;
 using CryptoMeta.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,29 +9,34 @@ namespace CryptoMeta.Business.Concrete
 {
     public class BlogManager : IBlogService
     {
+        private IBlogDal _blogDal;
+        public BlogManager(IBlogDal blogDal)
+        {
+            _blogDal = blogDal;
+        }
         public void Create(Blog entity)
         {
-            throw new NotImplementedException();
+            _blogDal.Create(entity);
         }
 
         public void Delete(Blog entity)
         {
-            throw new NotImplementedException();
+            _blogDal.Delete(entity);
         }
 
         public List<Blog> GetAll()
         {
-            throw new NotImplementedException();
+            return _blogDal.GetAll();
         }
 
         public Blog GetbyId(int id)
         {
-            throw new NotImplementedException();
+            return _blogDal.GetbyId(id);
         }
 
         public void Update(Blog entity)
         {
-            throw new NotImplementedException();
+            _blogDal.Update(entity);
         }
     }
 }

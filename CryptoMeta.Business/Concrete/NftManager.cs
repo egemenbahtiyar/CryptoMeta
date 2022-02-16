@@ -1,4 +1,5 @@
 ﻿using CryptoMeta.Business.Abstract;
+using CryptoMeta.DataAccess.Abstract;
 using CryptoMeta.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,29 +9,34 @@ namespace CryptoMeta.Business.Concrete
 {
     public class NftManager : INftService
     {
+        private INftDal _nftDal;
+        public NftManager(INftDal nftDal)
+        {
+            _nftDal = nftDal;
+        }
         public void Create(Nft entity)
         {
-            throw new NotImplementedException();
+            _nftDal.Create(entity);
         }
 
         public void Delete(Nft entity)
         {
-            throw new NotImplementedException();
+            _nftDal.Delete(entity);
         }
 
         public List<Nft> GetAll()
         {
-            throw new NotImplementedException();
+            return _nftDal.GetAll();
         }
 
         public Nft GetbyId(int id)
         {
-            throw new NotImplementedException();
+            return _nftDal.GetbyId(id);
         }
 
         public void Update(Nft entity)
         {
-            throw new NotImplementedException();
+            _nftDal.Update(entity);
         }
     }
 }
