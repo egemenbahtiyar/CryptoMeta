@@ -289,11 +289,11 @@ namespace CryptoMeta.Controllers
 
                 if (file != null)
                 {
-                    var imagepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\Nftimg", entity.NftImageUrl);     // Test et
-                    if (System.IO.File.Exists(imagepath))
-                    {
-                        System.IO.File.Delete(imagepath);
-                    }
+                    //var imagepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\Nftimg", entity.NftImageUrl);     // Test et
+                    //if (System.IO.File.Exists(imagepath))
+                    //{
+                    //    System.IO.File.Delete(imagepath);
+                    //}
                     entity.NftImageUrl = model.NftImageUrl;
                     var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\Nftimg", file.FileName);
                     using (var stream = new FileStream(path, FileMode.Create))

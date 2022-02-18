@@ -221,7 +221,6 @@ namespace CryptoMeta.Entities
                     .HasMaxLength(250);
 
                 entity.Property(e => e.NftImageUrl)
-                    .IsRequired()
                     .HasMaxLength(100);
             });
 
