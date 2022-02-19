@@ -29,7 +29,16 @@ namespace CryptoMeta.Controllers
         }
         public ActionResult Index()
         {
-            return View();
+            var AdminIndexListViewmodel = new AdminIndexListViewmodel()
+            {
+                Categories = _categoryService.GetAll(),
+                Blogs = _blogService.GetAll(),
+                CryptoNews = _cryptoNewService.GetAll(),
+                ForumPosts = _forumPostService.GetAll(),
+                Nfts = _nftService.GetAll()
+            };
+
+            return View(AdminIndexListViewmodel);
         }
 
         [HttpGet]
@@ -226,18 +235,17 @@ namespace CryptoMeta.Controllers
                 {
                     Id = NftModel.Id,
                     NftCreatedTime = NftModel.NftCreatedTime,
-                    NftDescription = NftModel.NftDescription,
-                    NftImageUrl = NftModel.NftImageUrl
+                    NftDescription = NftModel.NftDescription
 
                 };
                 if (file != null)
                 {
-                    entity.NftImageUrl = NftModel.NftImageUrl;
                     var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\Nftimg", file.FileName);
                     using (var stream = new FileStream(path, FileMode.Create))
                     {
                         await file.CopyToAsync(stream);
                     }
+                    entity.NftImageUrl = path;
                 }
                 _nftService.Create(entity);
 
@@ -324,7 +332,33 @@ namespace CryptoMeta.Controllers
                 _nftService.Delete(entity);
             }
 
-            return RedirectToAction("CategoryList"); // SONRA EKLENCEK
+            return RedirectToAction("Index"); // SONRA EKLENCEK
+        }
+
+        [HttpDelete]
+        public IActionResult DeleteBlog(int Id)
+        {
+            var entity = _blogService.GetbyId(Id);
+
+            if (entity != null)
+            {
+                _blogService.Delete(entity);
+            }
+
+            return RedirectToAction("Index"); // SONRA EKLENCEK
+        }
+
+        [HttpDelete]
+        public IActionResult DeleteForumPost(int Id)
+        {
+            var entity = _forumPostService.GetbyId(Id);
+
+            if (entity != null)
+            {
+                _forumPostService.Delete(entity);
+            }
+
+            return RedirectToAction("Index"); // SONRA EKLENCEK
         }
 
     }
