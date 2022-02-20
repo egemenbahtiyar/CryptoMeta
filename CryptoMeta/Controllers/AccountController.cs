@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace CryptoMeta.Controllers
 {
+    [AutoValidateAntiforgeryToken]
     public class AccountController : Controller
     {
         public UserManager<User> _userManager;
@@ -57,9 +58,10 @@ namespace CryptoMeta.Controllers
                 });
 
                 // send email
-                await _emailSender.SendEmailAsync(model.Email, "Hesabınızı Onaylayınız.", $"Lütfen email hesabınızı onaylamak için linke <a href='http://localhost:49884{callbackUrl}'>tıklayınız.</a>");
+                await _emailSender.SendEmailAsync(model.Email, "Hesabınızı Onaylayınız.", $"Lütfen email hesabınızı onaylamak için linke <a href='https://localhost:44319{callbackUrl}'>tıklayınız.</a>");
 
-                return RedirectToAction("Login", "Account");
+                //return RedirectToAction("Login", "Account");
+                return RedirectToAction("Index", "Home");
             }
             ModelState.AddModelError("", "Bilinmeyen hata oluştu lütfen tekrar deneyiniz.");
             return View(model);
@@ -163,7 +165,7 @@ namespace CryptoMeta.Controllers
             });
 
             // send email
-            await _emailSender.SendEmailAsync(Email, "Reset Password", $"Parolanızı yenilemek için linke <a href='http://localhost:49884{callbackUrl}'>tıklayınız.</a>");
+            await _emailSender.SendEmailAsync(Email, "Reset Password", $"Parolanızı yenilemek için linke <a href='https://localhost:44319{callbackUrl}'>tıklayınız.</a>");
 
             return RedirectToAction("Login", "Account");
         }

@@ -32,7 +32,7 @@ namespace CryptoMeta
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationContext>(_ => _.UseSqlServer(Configuration["ConnectionStrings:MsSqlConnection"]));
-            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<ApplicationContext>();
+            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<ApplicationContext>().AddDefaultTokenProviders();
             services.AddControllersWithViews();
             services.Configure<IdentityOptions>(options =>
             {
