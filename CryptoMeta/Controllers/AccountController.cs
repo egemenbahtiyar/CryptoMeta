@@ -167,7 +167,7 @@ namespace CryptoMeta.Controllers
             // send email
             await _emailSender.SendEmailAsync(Email, "Reset Password", $"Parolanızı yenilemek için linke <a href='https://localhost:44319{callbackUrl}'>tıklayınız.</a>");
 
-            return RedirectToAction("Login", "Account");
+            return RedirectToAction("Index", "Home");
         }
 
 
@@ -175,7 +175,7 @@ namespace CryptoMeta.Controllers
         {
             if (token == null)
             {
-                return RedirectToAction("Home", "Index");
+                return RedirectToAction("Index", "Home");
             }
             var model = new ResetPasswordModel { Token = token };
             return View(model);
@@ -192,14 +192,14 @@ namespace CryptoMeta.Controllers
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
-                return RedirectToAction("Home", "Index");
+                return RedirectToAction("Index", "Home");
             }
 
-            var result = await _userManager.ResetPasswordAsync(user, model.Token, model.Password);
+            var result = await _userManager.ResetPasswordAsync(user,model.Token,model.Password);
 
             if (result.Succeeded)
             {
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Index", "Home");
             }
             return View(model);
         }
