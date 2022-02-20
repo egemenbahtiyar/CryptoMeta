@@ -190,6 +190,7 @@ namespace CryptoMeta.Controllers
             }
 
             var user = await _userManager.FindByEmailAsync(model.Email);
+
             if (user == null)
             {
                 return RedirectToAction("Index", "Home");
@@ -201,6 +202,7 @@ namespace CryptoMeta.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+            ModelState.AddModelError("", "Lütfen E-Mail adresinizi doğru girdiğinizden emin olun");
             return View(model);
         }
     }

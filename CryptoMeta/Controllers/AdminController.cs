@@ -1,6 +1,7 @@
 ﻿using CryptoMeta.Business.Abstract;
 using CryptoMeta.Entities;
 using CryptoMeta.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,8 +12,10 @@ using System.Threading.Tasks;
 
 namespace CryptoMeta.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
+        
         public IBlogService _blogService { get; }
         public ICategoryService _categoryService { get; }
         public ICryptoNewService _cryptoNewService { get; }
