@@ -2,6 +2,7 @@ using CryptoMeta.Business.Abstract;
 using CryptoMeta.Business.Concrete;
 using CryptoMeta.DataAccess.Abstract;
 using CryptoMeta.DataAccess.Concrete;
+using CryptoMeta.EmailService;
 using CryptoMeta.Identitiy;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -81,6 +82,15 @@ namespace CryptoMeta
             services.AddScoped<ICryptoNewService, CryptoNewManager>();
             services.AddScoped<IForumPostService, ForumPostManager>();
             services.AddScoped<INftService, NftManager>();
+
+            services.AddTransient<IEmailSender, EmailSender>(i=>
+            new EmailSender(
+                Configuration["EmailSender:Host"],
+                Configuration.GetValue<int>("EmailSender:Port"),
+                Configuration.GetValue<bool>("EmailSender:EnableSSL"),
+                Configuration["EmailSender:UserName"],
+                Configuration["EmailSender:Password"]
+                ));
 
         }
 

@@ -1,4 +1,5 @@
-﻿using CryptoMeta.Identitiy;
+﻿using CryptoMeta.EmailService;
+using CryptoMeta.Identitiy;
 using CryptoMeta.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -14,12 +15,13 @@ namespace CryptoMeta.Controllers
     {
         public UserManager<User> _userManager;
         public SignInManager<User> _signInManager;
-        //private IEmailSender _emailSender;
+        public IEmailSender _emailSender;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IEmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _emailSender = emailSender;
         }
 
         public IActionResult Register()
@@ -46,18 +48,18 @@ namespace CryptoMeta.Controllers
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
-                //// generate token
-                //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                //var callbackUrl = Url.Action("ConfirmEmail", "Account", new
-                //{
-                //    userId = user.Id,                                                                 Email gelince doldur.
-                //    token = code
-                //});
+                // generate token
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                var callbackUrl = Url.Action("ConfirmEmail", "Account", new
+                {
+                    userId = user.Id,
+                    token = code
+                });
 
-                //// send email
-                //await _emailSender.SendEmailAsync(model.Email, "Hesabınızı Onaylayınız.", $"Lütfen email hesabınızı onaylamak için linke <a href='http://localhost:49884{callbackUrl}'>tıklayınız.</a>");
+                // send email
+                await _emailSender.SendEmailAsync(model.Email, "Hesabınızı Onaylayınız.", $"Lütfen email hesabınızı onaylamak için linke <a href='http://localhost:49884{callbackUrl}'>tıklayınız.</a>");
 
-                //return RedirectToAction("Login", "Account");
+                return RedirectToAction("Login", "Account");
             }
             ModelState.AddModelError("", "Bilinmeyen hata oluştu lütfen tekrar deneyiniz.");
             return View(model);
@@ -161,7 +163,7 @@ namespace CryptoMeta.Controllers
             });
 
             // send email
-            //await _emailSender.SendEmailAsync(Email, "Reset Password", $"Parolanızı yenilemek için linke <a href='http://localhost:49884{callbackUrl}'>tıklayınız.</a>");
+            await _emailSender.SendEmailAsync(Email, "Reset Password", $"Parolanızı yenilemek için linke <a href='http://localhost:49884{callbackUrl}'>tıklayınız.</a>");
 
             return RedirectToAction("Login", "Account");
         }
