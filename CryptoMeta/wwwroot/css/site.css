@@ -1,71 +1,103 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
-}
-
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
-}
-
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
-
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
-
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  font-size: 14px;
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
-
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
-}
-
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
-}
-
+﻿@import url(https://fonts.googleapis.com/css?family=Oswald|Roboto|Slabo+27px);
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+  background: #ececec;
 }
-.footer {
-  position: absolute;
-  bottom: 0;
+
+h1 {
+  font-size: 32px;
+  margin-top: 30px;
+  font-family: "Oswald", sans-serif;
+  text-align: center;
+}
+
+.blog-wrapper {
+  padding: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.blog-wrapper .blog-card {
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  transition: 0.3s;
+  max-width: 300px;
+  margin: 15px;
+  background: #fff;
+  border: 1px solid #CB6074;
+  text-align: center;
+  cursor: pointer;
+}
+.blog-wrapper .blog-card:hover {
+  box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.1);
+}
+.blog-wrapper .blog-card:hover .card-img img {
+  opacity: 0.8;
+}
+.blog-wrapper .blog-card .card-img {
+  position: relative;
+  text-align: center;
+  background: #CB6074;
+}
+.blog-wrapper .blog-card .card-img img {
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  transition: 0.3s;
+  max-height: 180px;
   width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+  border-bottom: 4px solid #CB6074;
+}
+.blog-wrapper .blog-card .card-img:before {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  margin-left: -10px;
+  width: 0;
+  height: 0;
+  border-top: solid 10px #CB6074;
+  border-left: solid 10px transparent;
+  border-right: solid 10px transparent;
+}
+.blog-wrapper .blog-card .card-img h1 {
+  position: absolute;
+  margin: 0;
+  font-size: 42px;
+  bottom: 15px;
+  width: 100%;
+  color: #fff;
+  font-family: "Slabo 27px", serif;
+}
+.blog-wrapper .blog-card .card-details {
+  margin-top: 30px;
+  font-family: "Roboto", sans-serif;
+  color: #3C3C3C;
+}
+.blog-wrapper .blog-card .card-details span {
+  padding: 0 30px;
+}
+.blog-wrapper .blog-card .card-details span i {
+  margin-right: 5px;
+}
+.blog-wrapper .blog-card .card-text {
+  padding: 30px 15px;
+  font-family: "Roboto", sans-serif;
+  line-height: 22px;
+}
+.blog-wrapper .blog-card .read-more {
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  transition: 0.3s;
+  display: inline-block;
+  width: auto;
+  text-align: center;
+  text-transform: uppercase;
+  background: #CB6074;
+  color: #fff;
+  padding: 15px;
+  margin-bottom: 30px;
+  font-family: "Oswald", sans-serif;
+}
+.blog-wrapper .blog-card .read-more:hover {
+  background: #943143;
 }

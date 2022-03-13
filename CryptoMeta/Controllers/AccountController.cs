@@ -4,6 +4,7 @@ using CryptoMeta.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,13 +17,18 @@ namespace CryptoMeta.Controllers
     {
         public UserManager<User> _userManager;
         public SignInManager<User> _signInManager;
+        public RoleManager<IdentityRole> _roleManager;
         public IEmailSender _emailSender;
+        public IConfiguration _configuration;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IEmailSender emailSender)
+
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IEmailSender emailSender, IConfiguration configuration, RoleManager<IdentityRole> roleManager )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
+            _configuration = configuration;
+            _roleManager = roleManager;
         }
 
         public IActionResult Register()
@@ -205,5 +211,41 @@ namespace CryptoMeta.Controllers
             ModelState.AddModelError("", "Lütfen E-Mail adresinizi doğru girdiğinizden emin olun");
             return View(model);
         }
+        [HttpGet]
+        public IActionResult RegisterAdmin()
+        {
+            return View(new RegisterModel());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RegisterAdmin(RegisterModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var user = new User
+            {
+                UserName = model.Username,
+                Email = model.Email,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                PasswordHash = model.Password,
+                EmailConfirmed = true
+
+            };
+            var role = _configuration["Data:AdminUser:role"];
+            //await _roleManager.CreateAsync(new IdentityRole(role));
+
+            var result = await _userManager.CreateAsync(user, model.Password);
+            if (result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(user, role);
+                return RedirectToAction("Index", "Home");
+            }
+            ModelState.AddModelError("", "Bilinmeyen hata oluştu lütfen tekrar deneyiniz.");
+            return View(model);
+        }
+
     }
 }
