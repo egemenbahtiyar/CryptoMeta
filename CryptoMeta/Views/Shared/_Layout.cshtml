@@ -4,8 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - CryptoMeta</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <script src="https://kit.fontawesome.com/c2d763bf5f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 </head>
 <body>
     <header>
@@ -23,7 +25,8 @@
                         {
                             <li class="nav-item">
                                 <a asp-controller="Account" asp-action="Manage" class="nav-link">
-                                    <i class="fa-solid fa-user"></i>@User.Identity.Name
+                                    <i class="bi bi-person-circle fa-1x"></i>
+                                    <span>@User.Identity.Name</span>
                                 </a>
                             </li>
                             <li class="nav-item">
