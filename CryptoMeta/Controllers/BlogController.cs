@@ -64,6 +64,10 @@ namespace CryptoMeta.Controllers
             var userId = _userManager.GetUserId(HttpContext.User);
             Blog entitiy = new Blog()
             {
+                BlogComment = "Created",
+                LikeCount = 0,
+                DislikeCount = 0,
+                BlogImageUrl = model.BlogImageUrl,
                 BlogCreatedTime = DateTime.Now,
                 BlogDescription = model.BlogDescription,
                 CategoryId = model.CategoryId,

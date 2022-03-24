@@ -141,7 +141,6 @@ namespace CryptoMeta.Entities
                     .HasMaxLength(200);
 
                 entity.Property(e => e.BlogImageUrl)
-                    .IsRequired()
                     .HasMaxLength(100);
 
                 entity.Property(e => e.Title)

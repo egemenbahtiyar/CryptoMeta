@@ -1,5 +1,6 @@
 ﻿using CryptoMeta.DataAccess.Abstract;
 using CryptoMeta.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace CryptoMeta.DataAccess.Concrete
         {
             using (var context = new CryptoMetaContext())
             {
-                return context.Set<Blog>().Where(x=>x.UserId==UserId).ToList();
+                return context.Blogs.Include(x=>x.Category).Include(x=>x.User).Where(x=>x.UserId==UserId).ToList();
             }
         }
     }

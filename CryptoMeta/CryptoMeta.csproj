@@ -26,4 +26,8 @@
     <ProjectReference Include="..\CryptoMeta.Entities\CryptoMeta.Entities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Blogimg\" />
+  </ItemGroup>
+
 </Project>
