@@ -34,6 +34,11 @@ namespace CryptoMeta.Business.Concrete
             return _blogDal.GetbyId(id);
         }
 
+        public List<Blog> GetMyArticles(string UserId)
+        {
+            return _blogDal.GetMyArticles(UserId);
+        }
+
         public void Update(Blog entity)
         {
             _blogDal.Update(entity);

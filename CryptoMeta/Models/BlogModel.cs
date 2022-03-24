@@ -14,6 +14,7 @@ namespace CryptoMeta.Models
         public int? LikeCount { get; set; }
         public int? DislikeCount { get; set; }
         public string BlogComment { get; set; }
+        public string CategoryName { get; set; }
         public DateTime BlogCreatedTime { get; set; }
         public string UserId { get; set; }
         public int CategoryId { get; set; }

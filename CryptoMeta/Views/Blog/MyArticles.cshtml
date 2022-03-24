@@ -1,0 +1,18 @@
+﻿@model List<BlogModel>
+
+@foreach (var item in Model)
+{
+    <div class="blog-wrapper">
+        <div class="blog-card">
+            <div class="card-img">
+                <img src="@item.BlogImageUrl">
+                <h1>@item.Title</h1>
+            </div>
+            <div class="card-details"><span><i class="fa fa-calendar"></i>@item.BlogCreatedTime</span><span><i class="fa fa-heart"></i>@item.LikeCount</span></div>
+            <div class="card-text"><p>@item.BlogDescription</p></div>
+            <a asp-controller="" asp-action=""><div class="read-more">Read More</div></a>
+
+        </div>
+    </div>
+
+}

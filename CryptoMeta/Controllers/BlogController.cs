@@ -64,7 +64,7 @@ namespace CryptoMeta.Controllers
             var userId = _userManager.GetUserId(HttpContext.User);
             Blog entitiy = new Blog()
             {
-                BlogCreatedTime = model.BlogCreatedTime,
+                BlogCreatedTime = DateTime.Now,
                 BlogDescription = model.BlogDescription,
                 CategoryId = model.CategoryId,
                 UserId = userId,
@@ -72,6 +72,29 @@ namespace CryptoMeta.Controllers
             };
             _blogService.Create(entitiy);
             return RedirectToAction("Index", "Home");
+        }
+        [HttpGet]
+        public IActionResult MyArticles()
+        {
+            var userId = _userManager.GetUserId(HttpContext.User);
+            var articles = _blogService.GetMyArticles(userId);
+            var Viewmodel = articles.Select(r => new BlogModel
+            {
+                Id = r.Id,
+                BlogComment = r.BlogComment,
+                BlogCreatedTime = r.BlogCreatedTime,
+                BlogDescription = r.BlogDescription,
+                BlogImageUrl = r.BlogImageUrl,
+                CategoryName = r.Category.CategoryName,
+                CategoryId =r.CategoryId,
+                LikeCount = r.LikeCount,
+                DislikeCount = r.DislikeCount,
+                Title = r.Title,
+                UserId = r.UserId
+                
+
+            }).ToList();
+            return View(Viewmodel);
         }
 
         public IActionResult Details(int? id)

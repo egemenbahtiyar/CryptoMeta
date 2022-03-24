@@ -8,6 +8,7 @@ namespace CryptoMeta.Business.Abstract
 {
     public interface IBlogService
     {
+        List<Blog> GetMyArticles(string UserId);
         Blog GetbyId(int id);
         List<Blog> GetAll();
         void Create(Blog entity);

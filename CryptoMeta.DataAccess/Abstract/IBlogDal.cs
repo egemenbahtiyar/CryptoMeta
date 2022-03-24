@@ -7,6 +7,6 @@ namespace CryptoMeta.DataAccess.Abstract
 {
     public interface IBlogDal:IRepository<Blog>
     {
-
+        public List<Blog> GetMyArticles(string UserId);
     }
 }
