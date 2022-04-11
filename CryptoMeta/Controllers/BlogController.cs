@@ -44,6 +44,7 @@ namespace CryptoMeta.Controllers
         {
             var categories = _categoryService.GetAll();
             ViewBag.CategoryId = new SelectList(categories, "Id", "CategoryName");
+            var userId = _userManager.GetUserId(HttpContext.User);
             if (!ModelState.IsValid)
             {
                 ModelState.AddModelError("", "Bilgileri doğru girdiğinizden emin olunuz.");
@@ -51,32 +52,35 @@ namespace CryptoMeta.Controllers
             }
             if (file != null)
             {
-                var extention = Path.GetExtension(file.FileName);
-                var randomName = string.Format($"{Guid.NewGuid()}{extention}");
-                model.BlogImageUrl = randomName;
-                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\Blogimg", randomName);
+    
+                Blog entitiy = new Blog()
+                {
+                    BlogComment = "Created",
+                    LikeCount = 0,
+                    DislikeCount = 0,
+                    BlogCreatedTime = DateTime.Now,
+                    BlogDescription = model.BlogDescription,
+                    CategoryId = model.CategoryId,
+                    UserId = userId,
+                    Title = model.Title,
+                };
+                
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/BlogPictures", fileName);
 
                 using (var stream = new FileStream(path, FileMode.Create))
                 {
                     await file.CopyToAsync(stream);
                 }
+                entitiy.BlogImageUrl = fileName;
+                _blogService.Create(entitiy);
+               
             }
-            var userId = _userManager.GetUserId(HttpContext.User);
-            Blog entitiy = new Blog()
-            {
-                BlogComment = "Created",
-                LikeCount = 0,
-                DislikeCount = 0,
-                BlogImageUrl = model.BlogImageUrl,
-                BlogCreatedTime = DateTime.Now,
-                BlogDescription = model.BlogDescription,
-                CategoryId = model.CategoryId,
-                UserId = userId,
-                Title = model.Title,
-            };
-            _blogService.Create(entitiy);
             return RedirectToAction("Index", "Home");
+
+
         }
+
         [HttpGet]
         public IActionResult MyArticles()
         {
@@ -90,7 +94,7 @@ namespace CryptoMeta.Controllers
                 BlogDescription = r.BlogDescription,
                 BlogImageUrl = r.BlogImageUrl,
                 CategoryName = r.Category.CategoryName,
-                CategoryId =r.CategoryId,
+                CategoryId =r.Category.Id,
                 LikeCount = r.LikeCount,
                 DislikeCount = r.DislikeCount,
                 Title = r.Title,
@@ -107,29 +111,7 @@ namespace CryptoMeta.Controllers
             return View();
         }
 
-        //public async Task<IActionResult> Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var blog = await _context.Blogs.FindAsync(id);
-        //    if (blog == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "KategoriAdi", blog.CategoryId);
-        //    return View(blog);
-        //}
-
-        //[HttpPost]
-        //public async Task<IActionResult> Edit(int id, Blog blog)
-        //{
-            
-        //    return View(blog);
-        //}
-
+       
 
     }
 }

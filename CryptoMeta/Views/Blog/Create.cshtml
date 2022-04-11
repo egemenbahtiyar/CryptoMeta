@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
@@ -23,10 +23,11 @@
                 <input asp-for="BlogDescription" class="form-control" />
                 <span asp-validation-for="BlogDescription" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="BlogImageUrl" class="control-label">Makaleniz için resim seçiniz</label>
-                <input asp-for="BlogImageUrl" class="form-control" type="file" accept="image/*" />
-                <span asp-validation-for="BlogImageUrl" class="text-danger"></span>
+            <div class="form-group row">
+                <label asp-for="BlogImageUrl" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input type="file" name="file">
+                </div>
             </div>
             <div class="form-group">
                 <label asp-for="CategoryId" class="control-label">Kategori seçiniz</label>

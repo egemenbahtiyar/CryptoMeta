@@ -243,12 +243,14 @@ namespace CryptoMeta.Controllers
                 };
                 if (file != null)
                 {
-                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\Nftimg", file.FileName);
+                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/NftPictures", fileName);
+
                     using (var stream = new FileStream(path, FileMode.Create))
                     {
                         await file.CopyToAsync(stream);
                     }
-                    entity.NftImageUrl = path;
+                    entity.NftImageUrl = fileName;
                 }
                 _nftService.Create(entity);
 

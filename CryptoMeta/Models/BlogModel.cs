@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,5 +19,6 @@ namespace CryptoMeta.Models
         public DateTime BlogCreatedTime { get; set; }
         public string UserId { get; set; }
         public int CategoryId { get; set; }
+
     }
 }
