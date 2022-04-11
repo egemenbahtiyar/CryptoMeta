@@ -39,6 +39,11 @@ namespace CryptoMeta.Business.Concrete
             return _blogDal.GetMyArticles(UserId);
         }
 
+        public List<Blog> SearcMyArticles(string q)
+        {
+            return _blogDal.SearcMyArticles(q);
+        }
+
         public void Update(Blog entity)
         {
             _blogDal.Update(entity);

@@ -103,3 +103,12 @@ h1 {
 .blog-wrapper .blog-card .read-more:hover {
   background: #943143;
 }
+
+#MyArticlesCardImg {
+    height: 200px;
+}
+#MyArticlesSearch {
+    margin: 0 auto;
+    display: block;
+    width: 800px;
+}

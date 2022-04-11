@@ -14,5 +14,6 @@ namespace CryptoMeta.Business.Abstract
         void Create(Blog entity);
         void Delete(Blog entity);
         void Update(Blog entity);
+        List<Blog> SearcMyArticles(string q);
     }
 }

@@ -1,18 +1,56 @@
 ﻿@model List<BlogModel>
 
-@foreach (var item in Model)
-{
-    <div class="blog-wrapper">
-        <div class="blog-card">
-            <div class="card-img">
-                <img src="~/BlogPictures/@item.BlogImageUrl">
-                <h1>@item.Title</h1>
-            </div>
-            <div class="card-details"><span><i class="fa fa-calendar"></i>@item.BlogCreatedTime</span><span><i class="fa fa-heart"></i>@item.LikeCount</span></div>
-            <div class="card-text"><p>@item.BlogDescription</p></div>
-            <a asp-controller="" asp-action=""><div class="read-more">Read More</div></a>
 
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <form class="form-inline d-flex my-2 my-lg-0" id="MyArticlesSearch">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" name="q" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="bi bi-search"></i></button>
+            </form>
         </div>
     </div>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 col-sm-6">
+                <div class="blog-wrapper">
+                    <div class="blog-card" style="width: 18rem;">
+                        <div class="card-img">
+                            <img src="~/BlogPictures/@item.BlogImageUrl" class="img-thumbnail" id="MyArticlesCardImg" >
+                            <h5 class="card-title">@item.Title</h5>
+                        </div>
+                        <div class="card-details"><span><i class="fa fa-calendar"></i>@item.BlogCreatedTime.ToString("dd-MM-yyyy")</span>
+                        <br />
+                        <span> 
+                            <i class="fa fa-heart"></i>@item.LikeCount
+                        </span>
+                        </div>
+                        <div class="card-text"><p>@item.BlogDescription</p></div>
+                        <a asp-controller="" asp-action=""><div class="read-more">Read More</div></a>
 
-}
+                    </div>
+                </div>
+                @*<div class="card mb-4" style="width: 18rem;">
+                    <img src="~/BlogPictures/@item.BlogImageUrl">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Title</h5>
+                        <i class="fa fa-calendar"></i>@item.BlogCreatedTime
+                        <br />
+                        <i class="fa fa-heart"></i>@item.LikeCount
+                        <p class="card-text">@item.BlogDescription</p>
+                        <a asp-controller="" asp-action=""><div class="read-more">Read More</div></a>
+                    </div>
+                </div>*@
+
+            </div>
+
+
+
+
+        }
+
+    </div>
+
+</div>

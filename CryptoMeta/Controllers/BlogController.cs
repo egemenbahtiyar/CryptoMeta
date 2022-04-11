@@ -82,7 +82,7 @@ namespace CryptoMeta.Controllers
         }
 
         [HttpGet]
-        public IActionResult MyArticles()
+        public IActionResult MyArticles(string q)
         {
             var userId = _userManager.GetUserId(HttpContext.User);
             var articles = _blogService.GetMyArticles(userId);
@@ -100,8 +100,33 @@ namespace CryptoMeta.Controllers
                 Title = r.Title,
                 UserId = r.UserId
                 
-
             }).ToList();
+            if (q != null)
+            {
+                var searchedArticles = _blogService.SearcMyArticles(q);
+                if (searchedArticles.Count!=0)
+                {
+                    var SearchedViewmodel = searchedArticles.Select(r => new BlogModel
+                    {
+                        Id = r.Id,
+                        BlogComment = r.BlogComment,
+                        BlogCreatedTime = r.BlogCreatedTime,
+                        BlogDescription = r.BlogDescription,
+                        BlogImageUrl = r.BlogImageUrl,
+                        CategoryName = r.Category.CategoryName,
+                        CategoryId = r.Category.Id,
+                        LikeCount = r.LikeCount,
+                        DislikeCount = r.DislikeCount,
+                        Title = r.Title,
+                        UserId = r.UserId
+
+
+                    }).ToList();
+                    return View(SearchedViewmodel);
+                }
+                return NotFound();
+
+            }
             return View(Viewmodel);
         }
 
@@ -110,8 +135,13 @@ namespace CryptoMeta.Controllers
 
             return View();
         }
-
        
+
+
+
+
+
+
 
     }
 }
