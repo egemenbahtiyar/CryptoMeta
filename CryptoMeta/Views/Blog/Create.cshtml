@@ -9,18 +9,18 @@
 <h4>Blog</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-12">
         <form asp-action="Create" enctype="multipart/form-data" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
                 <label asp-for="Title" class="control-label">Başlık giriniz</label>
-                <input asp-for="Title" class="form-control" />
+                <input asp-for="Title" class="form-control w-50" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Title" class="control-label">Açıklama giriniz</label>
-                <input asp-for="BlogDescription" class="form-control" />
+                <label asp-for="BlogDescription" class="control-label">Açıklama giriniz</label>
+                <textarea asp-for="BlogDescription" class="form-control"></textarea>
                 <span asp-validation-for="BlogDescription" class="text-danger"></span>
             </div>
             <div class="form-group row">
@@ -29,15 +29,16 @@
                     <input type="file" name="file">
                 </div>
             </div>
-            <div class="form-group mb-2">
+            <div class="form-group mb-2 w-25">
                 <label asp-for="CategoryId" class="control-label">Kategori seçiniz</label>
-                <select asp-for="CategoryId" class="form-select" asp-items="ViewBag.CategoryId"></select>
+                <select asp-for="CategoryId" class="form-select" asp-items="ViewBag.CategoryId" ></select>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
+
         </form>
     </div>
+</div>
+<div class="form-group">
+    <input type="submit" value="Create" class="btn btn-primary" />
 </div>
 
 <div>

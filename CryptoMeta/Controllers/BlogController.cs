@@ -130,10 +130,27 @@ namespace CryptoMeta.Controllers
             return View(Viewmodel);
         }
 
-        public IActionResult Details(int? id)
+        public IActionResult Details(int id)
         {
+            var blog = _blogService.GetbyId(id);
 
-            return View();
+            if (blog != null)
+            {
+                BlogModel Vmodel = new BlogModel();
+                Vmodel.BlogComment = blog.BlogComment;
+                Vmodel.BlogCreatedTime = blog.BlogCreatedTime;
+                Vmodel.BlogDescription = blog.BlogDescription;
+                Vmodel.BlogImageUrl = blog.BlogImageUrl;
+                Vmodel.CategoryName = blog.Category.CategoryName;
+                Vmodel.CategoryId = blog.Category.Id;
+                Vmodel.DislikeCount = blog.DislikeCount;
+                Vmodel.Title = blog.Title;
+
+                return View(Vmodel);
+
+            }
+            return RedirectToAction("Index", "Home");
+            
         }
        
 
