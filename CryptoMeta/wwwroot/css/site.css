@@ -112,3 +112,8 @@ h1 {
     display: block;
     width: 800px;
 }
+@media screen and (max-width: 984px) {
+    #MyArticlesSearch {
+        width: 300px;
+    }
+}

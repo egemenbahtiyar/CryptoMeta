@@ -18,16 +18,25 @@
                 <div class="blog-wrapper">
                     <div class="blog-card" style="width: 18rem;">
                         <div class="card-img">
-                            <img src="~/BlogPictures/@item.BlogImageUrl" class="img-thumbnail" id="MyArticlesCardImg" >
+                            <img src="~/BlogPictures/@item.BlogImageUrl" class="img-thumbnail" id="MyArticlesCardImg">
                             <h5 class="card-title">@item.Title</h5>
                         </div>
-                        <div class="card-details"><span><i class="fa fa-calendar"></i>@item.BlogCreatedTime.ToString("dd-MM-yyyy")</span>
-                        <br />
-                        <span> 
-                            <i class="fa fa-heart"></i>@item.LikeCount
-                        </span>
+                        <div class="card-details">
+                            <span><i class="fa fa-calendar"></i>@item.BlogCreatedTime.ToString("dd-MM-yyyy")</span>
+                            <br />
+                            <span>
+                                <i class="fa fa-heart"></i>@item.LikeCount
+                            </span>
                         </div>
-                        <div class="card-text"><p>@item.BlogDescription</p></div>
+                        @if (@item.BlogDescription.Length > 30)
+                        {
+                            <div class="card-text"><p>@item.BlogDescription.Substring(0, 30) <strong>....</strong></p></div>
+                        }
+                        else
+                        {
+                            <div class="card-text"><p>@item.BlogDescription.Substring(0, item.BlogDescription.Length)</p></div>
+                        }
+
                         <a asp-controller="" asp-action=""><div class="read-more">Read More</div></a>
 
                     </div>
