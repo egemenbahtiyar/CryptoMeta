@@ -171,13 +171,14 @@ namespace CryptoMeta.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            
+            var categories = _categoryService.GetAll();
+            ViewBag.CategoryId = new SelectList(categories, "Id", "CategoryName");
             var blog = _blogService.GetbyId(id);
-
             var model = new BlogModel();
 
             if (blog!=null)
             {
+                model.Id = blog.Id;
                 model.BlogComment = blog.BlogComment;
                 model.BlogDescription = blog.BlogDescription;
                 model.CategoryId = blog.CategoryId;
@@ -195,10 +196,9 @@ namespace CryptoMeta.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, BlogModel model, IFormFile file)
+        public async Task<IActionResult> Edit(int id,BlogModel model, IFormFile file)
         {
-            var categories = _categoryService.GetAll();
-            ViewBag.CategoryId = new SelectList(categories, "Id", "CategoryName");
+
             if (!ModelState.IsValid)
             {
                 ModelState.AddModelError("", "Bilgileri doğru girdiğinizden emin olunuz.");
@@ -208,14 +208,16 @@ namespace CryptoMeta.Controllers
 
             if (blog != null)
             {
-                blog.BlogComment = model.BlogComment;
                 blog.BlogDescription = model.BlogDescription;
                 blog.CategoryId = model.CategoryId;
                 blog.Category.CategoryName = model.CategoryName;
-                blog.LikeCount = model.LikeCount;
-                blog.DislikeCount = model.DislikeCount;
                 blog.Title = model.Title;
 
+                if (file==null)
+                {
+                    _blogService.Update(blog);
+                    return RedirectToAction("MyArticles", "Blog");
+                }
                 var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                 var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/BlogPictures", fileName);
 
@@ -223,8 +225,11 @@ namespace CryptoMeta.Controllers
                 {
                     await file.CopyToAsync(stream);
                 }
+
                 blog.BlogImageUrl = fileName;
                 _blogService.Update(blog);
+
+
                 return RedirectToAction("MyArticles", "Blog");
             }
             return NotFound();

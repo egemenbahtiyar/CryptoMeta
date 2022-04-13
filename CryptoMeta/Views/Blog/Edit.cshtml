@@ -1,0 +1,51 @@
+﻿@model CryptoMeta.Models.BlogModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Edit</h1>
+
+<h4>Blog</h4>
+<hr />
+<div class="row">
+    <div class="col-12">
+        <form asp-action="Edit" enctype="multipart/form-data" method="post">
+            <input type="hidden" name="id" value="@Model.Id">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label">Başlık giriniz</label>
+                <input asp-for="Title" class="form-control w-50" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BlogDescription" class="control-label">Açıklama giriniz</label>
+                <textarea asp-for="BlogDescription" class="form-control"></textarea>
+                <span asp-validation-for="BlogDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <strong>Makale için resim seçiniz: </strong>
+                <div class="col-sm-10">
+                    <input type="file" name="file">
+                </div>
+            </div>
+            <div class="form-group mb-2 w-25">
+                <label asp-for="CategoryId" class="control-label">Kategori seçiniz</label>
+                <select asp-for="CategoryId" class="form-select" asp-items="ViewBag.CategoryId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Düzenlemeyi onayla" class="btn btn-primary" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+<div>
+    <a asp-action="MyArticles" asp-controller="Blog">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
