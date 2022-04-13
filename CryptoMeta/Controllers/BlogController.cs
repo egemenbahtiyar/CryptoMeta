@@ -143,6 +143,7 @@ namespace CryptoMeta.Controllers
                 Vmodel.BlogImageUrl = blog.BlogImageUrl;
                 Vmodel.CategoryName = blog.Category.CategoryName;
                 Vmodel.CategoryId = blog.Category.Id;
+                Vmodel.LikeCount = blog.LikeCount;
                 Vmodel.DislikeCount = blog.DislikeCount;
                 Vmodel.Title = blog.Title;
 
@@ -151,6 +152,82 @@ namespace CryptoMeta.Controllers
             }
             return RedirectToAction("Index", "Home");
             
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            var blog = _blogService.GetbyId(id);
+
+            if (blog!=null)
+            {
+                _blogService.Delete(blog);
+                return RedirectToAction("MyArticles", "Blog");
+            }
+            return NotFound();
+        }
+
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            
+            var blog = _blogService.GetbyId(id);
+
+            var model = new BlogModel();
+
+            if (blog!=null)
+            {
+                model.BlogComment = blog.BlogComment;
+                model.BlogDescription = blog.BlogDescription;
+                model.CategoryId = blog.CategoryId;
+                model.CategoryName = blog.Category.CategoryName;
+                model.LikeCount = blog.LikeCount;
+                model.DislikeCount = blog.DislikeCount;
+                model.Title = blog.Title;
+                model.BlogImageUrl = blog.BlogImageUrl;
+
+                return View(model);
+
+            }
+            return NotFound();
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, BlogModel model, IFormFile file)
+        {
+            var categories = _categoryService.GetAll();
+            ViewBag.CategoryId = new SelectList(categories, "Id", "CategoryName");
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Bilgileri doğru girdiğinizden emin olunuz.");
+                return View(model);
+            }
+            var blog = _blogService.GetbyId(id);
+
+            if (blog != null)
+            {
+                blog.BlogComment = model.BlogComment;
+                blog.BlogDescription = model.BlogDescription;
+                blog.CategoryId = model.CategoryId;
+                blog.Category.CategoryName = model.CategoryName;
+                blog.LikeCount = model.LikeCount;
+                blog.DislikeCount = model.DislikeCount;
+                blog.Title = model.Title;
+
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/BlogPictures", fileName);
+
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+                blog.BlogImageUrl = fileName;
+                _blogService.Update(blog);
+                return RedirectToAction("MyArticles", "Blog");
+            }
+            return NotFound();
         }
        
 

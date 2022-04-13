@@ -19,9 +19,9 @@
                     <img src="~/BlogPictures/@item.BlogImageUrl" class="img-thumbnail" id="MyArticlesCardImg">
                     <div class="card-body">
                         <h5 class="card-title">@item.Title</h5>
-                        <i class="fa fa-calendar"></i>@item.BlogCreatedTime
+                        <i class="fa fa-calendar"></i>  @item.BlogCreatedTime.ToString("dd-MMMM-yyyy")
                         <br />
-                        <i class="fa fa-heart"></i>@item.LikeCount
+                        <i class="fa fa-heart"></i>  @item.LikeCount
                         @if (@item.BlogDescription.Length > 30)
                         {
                             <div class="card-text"><p>@item.BlogDescription.Substring(0, 30) <strong>....</strong></p></div>
