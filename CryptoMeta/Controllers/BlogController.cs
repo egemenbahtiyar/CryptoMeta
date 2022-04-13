@@ -132,11 +132,13 @@ namespace CryptoMeta.Controllers
 
         public IActionResult Details(int id)
         {
+            var userId = _userManager.GetUserId(HttpContext.User);
             var blog = _blogService.GetbyId(id);
-
+            
             if (blog != null)
             {
                 BlogModel Vmodel = new BlogModel();
+                Vmodel.Id = blog.Id;
                 Vmodel.BlogComment = blog.BlogComment;
                 Vmodel.BlogCreatedTime = blog.BlogCreatedTime;
                 Vmodel.BlogDescription = blog.BlogDescription;
@@ -147,9 +149,17 @@ namespace CryptoMeta.Controllers
                 Vmodel.DislikeCount = blog.DislikeCount;
                 Vmodel.Title = blog.Title;
 
+                ViewBag.IsWriter = "false";
+                if (userId == blog.UserId)
+                {
+                    ViewBag.IsWriter = "true";
+                }
+
                 return View(Vmodel);
 
             }
+
+            
             return RedirectToAction("Index", "Home");
             
         }

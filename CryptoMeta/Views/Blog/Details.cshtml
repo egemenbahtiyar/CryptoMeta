@@ -18,6 +18,11 @@
                         <strong>@Model.BlogCreatedTime.ToString("dd-MMMM-yyyy")</strong>
                         <h6>Written by: Egemen Bahtiyar</h6>
                         Like: @Model.LikeCount
+                        @if (ViewBag.IsWriter == "true")
+                        {
+                            <a href="/Blog/Edit/@Model.Id">Edit this blog</a>
+                            <a href="/Blog/Delete/@Model.Id">Delete this blog</a>
+                        }
 
                     </div>
                 </div>
