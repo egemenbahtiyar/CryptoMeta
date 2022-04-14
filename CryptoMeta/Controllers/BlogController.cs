@@ -164,7 +164,7 @@ namespace CryptoMeta.Controllers
             
         }
 
-        [HttpDelete]
+        [HttpPost]
         public IActionResult Delete(int id)
         {
             var blog = _blogService.GetbyId(id);
