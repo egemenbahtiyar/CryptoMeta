@@ -171,6 +171,12 @@ namespace CryptoMeta.Controllers
 
             if (blog!=null)
             {
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/BlogPictures", blog.BlogImageUrl);
+                if (System.IO.File.Exists(path))
+                {
+                    System.IO.File.Delete(path);
+                }
+               
                 _blogService.Delete(blog);
                 return RedirectToAction("MyArticles", "Blog");
             }
@@ -228,6 +234,12 @@ namespace CryptoMeta.Controllers
                     _blogService.Update(blog);
                     return RedirectToAction("MyArticles", "Blog");
                 }
+                var firstPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/BlogPictures", blog.BlogImageUrl);
+                if (System.IO.File.Exists(firstPath))
+                {
+                    System.IO.File.Delete(firstPath);                                                                                    // Delete the first picture
+                }
+
                 var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                 var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/BlogPictures", fileName);
 
