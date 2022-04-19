@@ -24,11 +24,11 @@
                         <i class="fa fa-heart"></i>  @item.LikeCount
                         @if (@item.BlogDescription.Length > 30)
                         {
-                            <div class="card-text"><p>@item.BlogDescription.Substring(0, 30) <strong>....</strong></p></div>
+                            <div class="card-text"><p>@Html.Raw(item.BlogDescription.Substring(0, 30))<strong>....</strong></p></div>
                         }
                         else
                         {
-                            <div class="card-text"><p>@item.BlogDescription.Substring(0, item.BlogDescription.Length)</p></div>
+                            <div class="card-text"><p>@Html.Raw(item.BlogDescription.Substring(0, item.BlogDescription.Length))</p></div>
                         }
                         <a href="/Blog/Details/@item.Id"><div class="read-more">Read More</div></a>
                     </div>

@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Create";
 }
-
+<script src="~/ckeditor5/build/ckeditor.js"></script>
 <h1>Create</h1>
 
 <h4>Blog</h4>
@@ -19,8 +19,7 @@
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BlogDescription" class="control-label">Açıklama giriniz</label>
-                <textarea asp-for="BlogDescription" class="form-control"></textarea>
+                <textarea asp-for="BlogDescription" class="form-control" id="editor"></textarea>
                 <span asp-validation-for="BlogDescription" class="text-danger"></span>
             </div>
             <div class="form-group row">
@@ -31,20 +30,30 @@
             </div>
             <div class="form-group mb-2 w-25">
                 <label asp-for="CategoryId" class="control-label">Kategori seçiniz</label>
-                <select asp-for="CategoryId" class="form-select" asp-items="ViewBag.CategoryId" ></select>
+                <select asp-for="CategoryId" class="form-select" asp-items="ViewBag.CategoryId"></select>
             </div>
+            <input type="submit" value="Create" class="btn btn-primary" />
 
         </form>
     </div>
 </div>
-<div class="form-group">
-    <input type="submit" value="Create" class="btn btn-primary" />
-</div>
+
 
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
 
-@section Scripts {
+@section scripts{
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .then(editor => {
+                console.log(editor);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+    </script>
 }
