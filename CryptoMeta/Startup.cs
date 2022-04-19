@@ -4,6 +4,7 @@ using CryptoMeta.DataAccess.Abstract;
 using CryptoMeta.DataAccess.Concrete;
 using CryptoMeta.EmailService;
 using CryptoMeta.Identitiy;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,7 +34,7 @@ namespace CryptoMeta
         {
             services.AddDbContext<ApplicationContext>(_ => _.UseSqlServer(Configuration["ConnectionStrings:MsSqlConnection"]));
             services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<ApplicationContext>().AddDefaultTokenProviders();
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
             services.Configure<IdentityOptions>(options =>
             {
                 // Password settings.
