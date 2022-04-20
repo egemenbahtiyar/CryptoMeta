@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\BlogPictures\" />
+    <Folder Include="wwwroot\EditorImages\" />
     <Folder Include="wwwroot\NftPictures\" />
   </ItemGroup>
 

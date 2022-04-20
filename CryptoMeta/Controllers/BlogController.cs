@@ -256,6 +256,37 @@ namespace CryptoMeta.Controllers
             }
             return NotFound();
         }
+
+        [HttpPost]
+        public async Task<ActionResult> UploadImage(List<IFormFile> files)
+        {
+            var filePath = "";
+            foreach (IFormFile photo in Request.Form.Files)
+            {
+                //string serverMapPath= Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/EditorImages", photo.FileName);
+
+                //using (var stream = new FileStream(serverMapPath, FileMode.Create))
+                //{
+                //    await photo.CopyToAsync(stream);
+
+                //}
+                //filePath = "https://localhost:44319/" + "EditorImages/" + photo.FileName;
+
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(photo.FileName);
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/EditorImages", fileName);
+
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await photo.CopyToAsync(stream);
+
+                }
+                filePath = "https://localhost:44319/" + "EditorImages/" + fileName;
+
+            }
+            return Json(new { url = filePath });
+
+
+        }
        
 
 
